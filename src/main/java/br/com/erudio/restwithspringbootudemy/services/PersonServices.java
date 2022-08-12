@@ -1,8 +1,12 @@
 package br.com.erudio.restwithspringbootudemy.services;
 
 import br.com.erudio.restwithspringbootudemy.model.Person;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -25,5 +29,18 @@ public class PersonServices {
 
     public void delete(String id){
         //logica para deletar, consultando o banco
+    }
+
+    public List<Person> readFromCsv() throws FileNotFoundException {
+        var pathFile = "src/main/resources/persons.csv";
+
+        var file = new FileReader(pathFile);
+
+        List<Person> persons = new CsvToBeanBuilder<Person>(file)
+            .withType(Person.class)
+            .build()
+            .parse();
+
+        return persons;
     }
 }
