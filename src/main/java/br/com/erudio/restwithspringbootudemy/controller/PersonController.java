@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/person")
@@ -26,6 +28,11 @@ public class PersonController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Person findById(@PathVariable("id") String id){
         return service.findById(id);
+    }
+
+    @GetMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Person> findPersons() throws FileNotFoundException {
+        return service.readFromCsv();
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
