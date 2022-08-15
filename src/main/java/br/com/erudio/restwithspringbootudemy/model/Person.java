@@ -17,8 +17,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Person {
 
+    //Para mapear a coluna do arquivo para este campo
     @CsvBindByName
     private Long id;
+
+    //quando a coluna do CSV tiver um nome diferente do atributo, necessário informar o nome
     @CsvBindByName(column = "first_name")
     private String firstName;
     @CsvBindByName(column = "last_name")
