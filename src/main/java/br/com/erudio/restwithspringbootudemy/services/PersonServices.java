@@ -31,16 +31,4 @@ public class PersonServices {
         //logica para deletar, consultando o banco
     }
 
-    public List<Person> readFromCsv() throws FileNotFoundException {
-        var pathFile = "src/main/resources/persons.csv";
-
-        var file = new FileReader(pathFile);
-
-        List<Person> persons = new CsvToBeanBuilder<Person>(file)
-            .withType(Person.class)
-            .build()
-            .parse();
-
-        return persons;
-    }
 }
