@@ -16,7 +16,7 @@ public class FileServices {
 
         var file = new FileReader(pathFile);
 
-        //Faz o bind dos dados do csv para uma lista de beans da classe especificada, se eu quisesse ler bean por bean
+        //Faz o bind dos dados do csv para uma lista de beans da classe especificada, se eu quisesse ler um ou mais bean por vez
         //aí usaria o CsvToBean();
         List<Person> persons = new CsvToBeanBuilder<Person>(file)
             .withType(Person.class)
