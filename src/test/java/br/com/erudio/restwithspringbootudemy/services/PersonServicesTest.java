@@ -1,17 +1,16 @@
 package br.com.erudio.restwithspringbootudemy.services;
 
-import br.com.erudio.restwithspringbootudemy.RestWithSpringbootUdemyApplication;
 import br.com.erudio.restwithspringbootudemy.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@SpringBootTest(webEnvironment = RANDOM_PORT, classes = {RestWithSpringbootUdemyApplication.class})
 //Se tiver muitos atributos, talvez seja melhor usarmos a anotação acima e aí usar Autowired e não é preciso usar o initMocks
@@ -31,6 +30,12 @@ class PersonServicesTest {
     @Test
     void whenFindAnIdThenReturnAnPerson() {
         var person = personServices.findById("1");
+
+        var now= ZonedDateTime.now(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS);
+
+        //data string sem milliseconds com Z no final
+        System.out.println(now.toString());
+
         assertEquals(person.getFirstName(), person1.getFirstName());
     }
 
